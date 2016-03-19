@@ -1,0 +1,47 @@
+<?php
+return
+[
+    'app' =>
+    [
+        'url' => '', // main url
+        'hash' =>
+        [
+            'algo' => PASSWORD_BCRYPT,
+            'cost' => 10
+        ]
+    ],
+    'db' =>
+    [
+        'driver' => '',
+        'host' => '127.0.0.1',
+        'name' => '',
+        'username' => '',
+        'password' => '',
+        'charset' => 'utf8',
+        'collation' => 'utf8_general_ci',
+        'prefix' => ''
+    ],
+    'auth' =>
+    [
+        'session' => 'user_id',
+        'remember' => 'user_r'
+    ],
+    'mail' =>
+    [
+        'smtp_auth' => true,
+        'smtp_secure' => 'ssl',
+        'host' => '',
+        'username' => '',
+        'password' => '',
+        'port' => 465,
+        'html' => true
+    ],
+    'twig' =>
+    [
+        'debug' => true
+    ],
+    'csrf' =>
+    [
+        'key' => 'csrf_token'
+    ]
+];

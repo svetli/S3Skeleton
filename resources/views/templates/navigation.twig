@@ -1,0 +1,10 @@
+<ul>
+	<li><a href="{{ path_for('home') }}">Home</a></li>
+	{% if auth %}
+	<li><a href="{{ path_for('logout') }}">Logout</a></li>
+	<li><a href="{{ path_for('change_password') }}">Change Password</a></li>
+	{% else %}
+	<li><a href="{{ path_for('register') }}">Register</a></li>
+	<li><a href="{{ path_for('login') }}">Login</a></li>
+	{% endif %}
+</ul>

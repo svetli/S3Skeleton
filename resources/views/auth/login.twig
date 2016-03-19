@@ -1,0 +1,36 @@
+{% extends 'templates/default.twig' %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block content %}
+<div>
+	<form action="{{ path_for('login.post') }}" method="post" autocomplete="off">
+		<div>
+			<label for="identifier">Username/Email</label>
+			<input type="text" name="identifier" id="identifier">
+			{% if errors.first('identifier') %}{{ errors.first('identifier') }}{% endif %}
+		</div>
+
+		<div>
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password">
+			{% if errors.first('password') %}{{ errors.first('password') }}{% endif %}
+		</div>
+
+		<div>
+			<input type="checkbox" name="remember" id="remember"><label for="remember">Remember me</label>
+		</div>
+
+		<div>
+			<input type="submit" value="login">
+			<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+		</div>
+
+		<div>
+			<a href="{{ path_for('password_recover') }}">Forgot password?</a>
+		</div>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Site | {% block title %}{% endblock %}</title>
+		
+		{% block head %}
+		{% endblock %}
+	</head>
+	<body>
+		{% include 'templates/navigation.twig' %}
+
+		{% block content %}
+		{% endblock %}
+
+		{% block js %}
+		{% endblock %}
+	</body>
+</html>

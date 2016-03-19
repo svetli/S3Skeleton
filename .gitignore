@@ -1,0 +1,17 @@
+vendor/
+composer.lock
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.
