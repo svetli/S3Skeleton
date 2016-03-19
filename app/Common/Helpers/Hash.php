@@ -59,11 +59,11 @@ class Hash
     /**
     * Check a hash against another.
     *
-    * @param string $known 	The hash we know is correct.
+    * @param string $know 	The hash we know is correct.
     * @param string $user 	The hash we want to compare with it.
     * @return bool 			True if the hashed strings match, false otherwise.
     */
-    public function hashCheck($known, $user)
+    public function hashCheck($know, $user)
     {
         return hash_equals($know, $user);
     } //End hashCheck
