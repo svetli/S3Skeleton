@@ -5,13 +5,11 @@
 
 if (!defined('IN_PROJECT'))
 {
-	exit;
+    exit;
 }
 
 require(GLOBAL_ROOT_PATH . '/app/routes/auth/auth_routes' . PHP_EXT);
 
-$app->get('/', function ($request, $response, $args) {
-	return $this->view->render($response, 'home.twig', [
-		'args' => $args,
-	]);
+$app->get('/', function ($request, $response) {
+    return $this->view->render($response, 'home.twig');
 })->setName('home');
