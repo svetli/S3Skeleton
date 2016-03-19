@@ -12,13 +12,13 @@ class UserPermission extends Eloquent
     protected $table = 'users_permissions';
 
     protected $fillable = [
-        'id_admin',
-        'id_mod'
+        'is_admin',
+        'is_mod'
     ];
 
     public static $defaults = [
-        'id_admin' => false,
-        'id_mod'   => false
+        'is_admin' => false,
+        'is_mod'   => false
     ];
 
 }
