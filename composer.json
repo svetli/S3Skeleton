@@ -20,7 +20,8 @@
         "illuminate/database": "5.2.21",
         "alexgarrett/violin": "2.2.2",
         "ircmaxell/random-lib": "1.1.0",
-        "phpmailer/phpmailer": "5.2.14"
+        "phpmailer/phpmailer": "5.2.14",
+        "codeguy/upload": "dev-master"
     },
     "autoload": {
         "psr-4": {
