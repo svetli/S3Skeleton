@@ -155,7 +155,7 @@ class User extends Eloquent
     */
     public function isAdmin()
     {
-        return $this->hasPermission('id_admin');
+        return $this->hasPermission('is_admin');
     } // End isAdmin
 
     /**
@@ -165,7 +165,7 @@ class User extends Eloquent
     */
     public function isMod()
     {
-        return $this->hasPermission('id_mod');
+        return $this->hasPermission('is_mod');
     } // End isMod
 
     /**
@@ -175,7 +175,7 @@ class User extends Eloquent
     */
     public function permissions()
     {
-        return $this->hasOne('\App\Common\User\UserPermission\UserPermission', 'user_id');
+        return $this->hasOne('\App\Common\User\UserPermission', 'user_id');
     } // End permissions
 
     /**

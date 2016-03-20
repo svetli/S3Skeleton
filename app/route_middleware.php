@@ -12,20 +12,53 @@
 * Requires the user to be authenticated to view the route.
 */
 $authenticated = function ($request, $response, $next) {
-	if (!$this->auth)
-	{
-		return $response->withRedirect($this->router->pathFor('home'));
-	}
-	return $next($request, $response);
+    if (!$this->auth)
+    {
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
+    return $next($request, $response);
 };
 
 /**
-* Requires the user to be a gust to view the route.
+* Requires the user to be a guest to view the route.
 */
 $guest = function ($request, $response, $next) {
-	if ($this->auth)
-	{
-		return $response->withRedirect($this->router->pathFor('home'));
-	}
-	return $next($request, $response);
+    if ($this->auth)
+    {
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
+    return $next($request, $response);
+};
+
+/**
+* Requires the user to be an admin to view the route.
+*/
+$admin = function ($request, $response, $next) {
+    if (!$this->auth || !$this->auth->isAdmin()) 
+    {
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
+    return $next($request, $response);
+};
+
+/**
+* Requires the user to be a mod to view the route.
+*/
+$mod = function ($request, $response, $next) {
+    if (!$this->auth || !$this->auth->isMod()) 
+    {
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
+    return $next($request, $response);
+};
+
+/**
+* Requires the user to be an admin or a mod to view the route.
+*/
+$both = function() use ($app) {
+    if (!$this->auth || !$this->auth->isMod() || !$this->auth->isAdmin()) 
+    {
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
+    return $next($request, $response);
 };
