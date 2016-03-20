@@ -175,7 +175,7 @@ class User extends Eloquent
     */
     public function permissions()
     {
-        return $this->hasOne('\App\Common\User\UserPermission', 'user_id');
+        return $this->hasMany('\App\Common\User\UserPermission', 'user_id');
     } // End permissions
 
     /**
