@@ -1,36 +1,46 @@
 {% extends 'templates/default.twig' %}
 
-{% block title %}
-	Login
-{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<div>
-	<form action="{{ path_for('login.post') }}" method="post" autocomplete="off">
-		<div>
-			<label for="identifier">Username/Email</label>
-			<input type="text" name="identifier" id="identifier">
-			{% if errors.first('identifier') %}{{ errors.first('identifier') }}{% endif %}
-		</div>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    {% include "templates/partials/messages.twig" %}
+    <p>
+        Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you within 24 hours!
+    </p>
+    {{ dump(posted) }}
 
-		<div>
-			<label for="password">Password</label>
-			<input type="password" name="password" id="password">
-			{% if errors.first('password') %}{{ errors.first('password') }}{% endif %}
-		</div>
-
-		<div>
-			<input type="checkbox" name="remember" id="remember"><label for="remember">Remember me</label>
-		</div>
-
-		<div>
-			<input type="submit" value="login">
-			<input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
-		</div>
-
-		<div>
-			<a href="{{ path_for('password_recover') }}">Forgot password?</a>
-		</div>
-	</form>
+    <form action="{{ path_for('login.post') }}" method="post" autocomplete="off">
+        <h2 class="form-signin-heading">Please Log in</h2>
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label for="identifier" class="sr-only">Username/email</label>
+                <input type="text" name="identifier" id="identifier"{% if posted.identifier %} value="{{ posted.identifier }}" {% endif %} class="form-control" placeholder="Username/email">
+                {% if errors.has('identifier') %}
+                <small class="help-block text-danger">
+                    {{ errors.first('identifier') }}
+                </small>
+                {% endif %}
+                <label for="password" class="sr-only">password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                {% if errors.has('password') %}
+                <small class="help-block text-danger">
+                    {{ errors.first('password') }}
+                </small>
+                {% endif %}
+            </div><br/>
+            <input type="checkbox" name="remember" id="remember">
+            <label for="remember">remember me?</label><br/>
+            <div class="row">
+                <div class="form-group col-xs-12"><br/>
+                    <button type="submit" class="btn btn-default btn-sm btn-block">Login</button>
+                </div>
+            </div>
+            <a href="{{ path_for('password_recover') }}" title="Forgot your password?">
+                Forgot your password?
+            </a>
+            <input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+        </div>
+    </form>
 </div>
 {% endblock %}

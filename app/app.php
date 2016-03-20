@@ -51,6 +51,7 @@ $container['view'] = function ($container) {
         $container['router'],
         $container['request']->getUri()
     ));
+    $view->addExtension(new Twig_Extension_Debug());
     return $view;
 };
 
