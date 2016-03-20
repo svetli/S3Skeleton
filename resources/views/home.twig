@@ -1,9 +1,11 @@
 {% extends 'templates/default.twig' %}
+{% block title %}HOME{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-{% for post in posts %}
+            {% if posts is not empty%}
+            {% for post in posts %}
             <div class="post-preview">
                 <a href="{{ path_for('post.detail', {'id': post.id, 'name': post.seo_url}) }}">
                     <h2 class="post-title">
@@ -13,16 +15,24 @@
                         {{ post.excerpt }}
                     </h3>
                 </a>
-                <p class="post-meta">Posted by <a href="#0">{{ post.getUserName }}</a> on {{ post.getCategoryName }}</p>
+                <p class="post-meta">
+                    Posted by <a href="#0">{{ post.getUserName }}</a> on {{ post.getCategoryName }}
+                </p>
             </div>
             <hr>
-{% endfor %}
+            {% endfor %}
             <!-- Pager -->
             <ul class="pager">
                 <li class="next">
                     <a href="#">Older Posts &rarr;</a>
                 </li>
             </ul>
+            {% else %}
+            <img src="assets/img/error/Nothing_to_do_here_by_rober_raik-d4cxltj.png" class="img-responsive img-center">
+            <h2 class="post-title">
+                Nothing to do here...
+            </h2>
+            {% endif %}
         </div>
     </div>
 </div>
