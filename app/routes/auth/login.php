@@ -15,7 +15,7 @@ $app->post('/login', function ($request, $response) {
     //	but I personally like using the array. Feel free to change it.
     $posted = $request->getParams();
 
-    //	The login form only reqwuires the user to enter their username or email address and
+    //	The login form only requires the user to enter their username or email address and
     //	their password, so create variables for them.
     $identifier = $posted['identifier'];
     $password 	= $posted['password'];
