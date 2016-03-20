@@ -21,14 +21,17 @@
             </div>
             <hr>
             {% endfor %}
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
-                </li>
-            </ul>
+            <nav>
+                <ul class="pager">
+                    <li class="next{% if AllPost|length <= 5 %} disabled{% endif %}">
+                        <a {% if AllPost|length > 5 %}href="#0"{% endif %}>
+                            Older Posts &rarr;
+                        </a>
+                    </li>
+                </ul>
+            </nav>
             {% else %}
-            <img src="assets/img/error/Nothing_to_do_here_by_rober_raik-d4cxltj.png" class="img-responsive img-center">
+            <img src="img/error/Nothing_to_do_here_by_rober_raik-d4cxltj.png" class="img-responsive img-center">
             <h2 class="post-title">
                 Nothing to do here...
             </h2>

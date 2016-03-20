@@ -23,14 +23,13 @@ $app->get('/', function ($request, $response)  use ($container) {
         ->take(5)
         ->get();
 
-
     return $this->view->render($response, 'home.twig', [
         'posts'     => $posted,
         'AllPost'   => $PostAll
     ]);
 })->setName('home');
 
-$app->get('/post/[{id:[0-9-]+}/[{name:[A-Za-z-]+}]]', function ($request, $response, $args)  use ($container) {
+$app->get('/post/[{id:[0-9]+}/[{name:[A-Za-z-]+}]]', function ($request, $response, $args)  use ($container) {
 
     echo $args['id'];
     echo '<br>';
