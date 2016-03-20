@@ -12,6 +12,8 @@ use \Noodlehaus\Config;
 use \Slim\Views\Twig;
 use \Slim\Views\TwigExtension;
 use \App\Common\User\User;
+use \App\Common\Post\Post;
+use \App\Common\Post\Category;
 use \App\Common\Validation\Validator;
 use \RandomLib\Factory;
 use \Slim\App;
@@ -59,6 +61,16 @@ require(GLOBAL_ROOT_PATH . '/app/database' . PHP_EXT);
 //	Inject our user model into the container.
 $container['user'] = function ($container) {
     return new User;
+};
+
+//	Inject our post model into the container.
+$container['post'] = function ($container) {
+    return new Post;
+};
+
+//	Inject our post model into the container.
+$container['category'] = function ($container) {
+    return new Category;
 };
 
 //	Create our hashing helper.

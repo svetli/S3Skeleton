@@ -18,6 +18,6 @@ class Category extends Eloquent {
 
     public function posts()
     {
-        return $this->hasMany('App\Common\Post');
+        return $this->hasMany('App\Common\Post\Post');
     }
 }

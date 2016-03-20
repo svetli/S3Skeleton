@@ -24,12 +24,12 @@ class Post extends Eloquent
 
     public function user()
     {
-        return $this->belongsTo('App\Common\User', 'user_id', 'id');
+        return $this->belongsTo('\App\Common\User\User', 'user_id', 'id');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Common\Category', 'category_id', 'id');
+        return $this->belongsTo('\App\Common\Post\Category', 'category_id', 'id');
     }
 
     public function getCategoryName()

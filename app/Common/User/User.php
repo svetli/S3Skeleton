@@ -175,7 +175,7 @@ class User extends Eloquent
     */
     public function permissions()
     {
-        return $this->hasOne('App\Common\User\UserPermission', 'user_id');
+        return $this->hasOne('\App\Common\User\UserPermission\UserPermission', 'user_id');
     } // End permissions
 
     /**
@@ -185,7 +185,7 @@ class User extends Eloquent
     */
     public function posts()
     {
-        return $this->hasMany('App\Common\Post\Post');
+        return $this->hasMany('\App\Common\Post\Post');
     } // End posts
 
 } //End class User
