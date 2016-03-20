@@ -55,7 +55,7 @@ $mod = function ($request, $response, $next) {
 /**
 * Requires the user to be an admin or a mod to view the route.
 */
-$both = function() {
+$both = function ($request, $response, $next) {
     if (!$this->auth || !$this->auth->isMod() || !$this->auth->isAdmin())
     {
         return $response->withRedirect($this->router->pathFor('home'));
