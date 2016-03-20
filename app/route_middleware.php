@@ -34,7 +34,7 @@ $guest = function ($request, $response, $next) {
 * Requires the user to be an admin to view the route.
 */
 $admin = function ($request, $response, $next) {
-    if (!$this->auth || !$this->auth->isAdmin()) 
+    if (!$this->auth || !$this->auth->isAdmin())
     {
         return $response->withRedirect($this->router->pathFor('home'));
     }
@@ -45,7 +45,7 @@ $admin = function ($request, $response, $next) {
 * Requires the user to be a mod to view the route.
 */
 $mod = function ($request, $response, $next) {
-    if (!$this->auth || !$this->auth->isMod()) 
+    if (!$this->auth || !$this->auth->isMod())
     {
         return $response->withRedirect($this->router->pathFor('home'));
     }
@@ -55,8 +55,8 @@ $mod = function ($request, $response, $next) {
 /**
 * Requires the user to be an admin or a mod to view the route.
 */
-$both = function() use ($app) {
-    if (!$this->auth || !$this->auth->isMod() || !$this->auth->isAdmin()) 
+$both = function() {
+    if (!$this->auth || !$this->auth->isMod() || !$this->auth->isAdmin())
     {
         return $response->withRedirect($this->router->pathFor('home'));
     }
