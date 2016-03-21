@@ -31,7 +31,7 @@ $app->get('/', function ($request, $response)  use ($container) {
 
 $app->get('/post/[{id:[0-9]+}/[{name:[A-Za-z-]+}]]', function ($request, $response, $args)  use ($container) {
 
-    //	Feel free to change all of it. :)
+    //	Feel free to change it. :)
 
     $id = $args['id'];
     $name = $args['name'];
@@ -39,7 +39,7 @@ $app->get('/post/[{id:[0-9]+}/[{name:[A-Za-z-]+}]]', function ($request, $respon
     $posted = $container->post
         ->where('id','=', "$id")
         ->where('seo_url', '=',"$name")
-        ->first();
+        ->get();
 
     return $this->view->render($response, 'templates/post_detail.twig', [
         'post'     => $posted
