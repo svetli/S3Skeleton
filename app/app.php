@@ -264,7 +264,6 @@ $app->add(function ($request, $response, $next) {
     return $next($request, $response);
 });
 
-
 //	Start our database connection. When we injected our capsule into the container
 //	it wasn't actually initialized. The callback is only ran after $this->db is called.
 //	Since we don't actually use the $db injection for anything because we're working
