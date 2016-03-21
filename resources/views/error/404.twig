@@ -1,0 +1,23 @@
+{% extends 'templates/default.twig' %}
+{% block title %}Page Not Found :|{% endblock %}
+{% set post_header = 2 %}
+{% block content %}
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>It looks like this was the result of either:</p>
+                <ul>
+                    <li>a mistyped address</li>
+                    <li>an out-of-date link</li>
+                </ul>
+                <script>
+                    var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
+                </script>
+                <script src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}

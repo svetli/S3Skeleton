@@ -40,6 +40,14 @@ $configuration = [
 ];
 //	We need to set up the container before creating our Slim instance.
 $container = new Container($configuration);
+
+//Override the default Not Found Handler
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        return $container['view']->render($response, 'error/404.twig')->withStatus(404);
+    };
+};
+
 //	Attach our config to the container using the Noodlehaus Config class.
 $container['config'] = function ($container) {
     return new Config([GLOBAL_ROOT_PATH . '/config' . '/' . MODE . PHP_EXT]);
@@ -267,6 +275,11 @@ $app->add(function ($request, $response, $next) {
     $db = $this->db;
     return $next($request, $response);
 });
-
+$app->add(function($request, $response, $next) {
+    $this->get('view')->getEnvironment()->addGlobal(
+        'base_url', $this->config->get('app.url')
+    );
+    return $next($request, $response);
+});
 //	Here we include our general functions or constants that we need, along with our routes.
 require(GLOBAL_ROOT_PATH . '/app/routes' . PHP_EXT);

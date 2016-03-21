@@ -62,3 +62,4 @@ $both = function ($request, $response, $next) {
     }
     return $next($request, $response);
 };
+

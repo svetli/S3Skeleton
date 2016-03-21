@@ -1,0 +1,50 @@
+{% if post_header == 1 %}
+<header class="intro-header" style="background-image: url('uploads/{{ post.image }}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>
+                        {{ post.title }}
+                    </h1>
+                    <h2 class="subheading">{{ post.excerpt }}</h2>
+                    <span class="meta">
+                        Posted by <a href="#0">{{ post.getUserName }}</a> on {{ post.getCategoryName }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% elseif post_header == 2 %}
+<header class="intro-header" style="background-image: url('img/404.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>
+                        Not found <span>:(</span>
+                    </h1>
+                    <h2 class="subheading">
+                        Sorry, but the page you were trying to view does not exist.
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% else %}
+<header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <hr class="small">
+                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endif %}

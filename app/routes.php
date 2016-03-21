@@ -9,6 +9,7 @@ if (!defined('IN_PROJECT'))
 }
 
 require(GLOBAL_ROOT_PATH . '/app/routes/auth/auth_routes' . PHP_EXT);
+require(GLOBAL_ROOT_PATH . '/app/routes/error/error' . PHP_EXT);
 
 $app->get('/', function ($request, $response)  use ($container) {
 
@@ -31,8 +32,30 @@ $app->get('/', function ($request, $response)  use ($container) {
 
 $app->get('/post/[{id:[0-9]+}/[{name:[A-Za-z-]+}]]', function ($request, $response, $args)  use ($container) {
 
-    echo $args['id'];
-    echo '<br>';
-    echo $args['name'];
+    //	Feel free to change all of it. :)
+
+    $id = $args['id'];
+    $name = $args['name'];
+
+    $post = $container->post
+        ->where('id','=', "$id")
+        ->where('seo_url', '=',"$name")
+        ->first()
+        ->count();
+
+    if ($post >= 1)
+    {
+        $posted = $container->post
+            ->where('id','=', "$id")
+            ->where('seo_url', '=',"$name")
+            ->first();
+        return $this->view->render($response, 'templates/post_detail.twig', [
+            'post'     => $posted
+        ]);
+    }
+    else
+    {
+        return $response->withRedirect($this->router->pathFor('error'));
+    }
 
 })->setName('post.detail');
