@@ -54,7 +54,7 @@ $container['config'] = function ($container) {
 };
 //	Setup the Twig views.
 $container['view'] = function ($container) {
-    $view = new Twig('../resources/views');
+    $view = new Twig(GLOBAL_ROOT_PATH . '/app/views');
     $view->addExtension(new TwigExtension(
         $container['router'],
         $container['request']->getUri()
