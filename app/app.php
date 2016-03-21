@@ -275,6 +275,8 @@ $app->add(function ($request, $response, $next) {
     $db = $this->db;
     return $next($request, $response);
 });
+
+// Appending sata to a view
 $app->add(function($request, $response, $next) {
     $this->get('view')->getEnvironment()->addGlobal(
         'base_url', $this->config->get('app.url')
