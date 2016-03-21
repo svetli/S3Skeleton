@@ -41,13 +41,6 @@ $configuration = [
 //	We need to set up the container before creating our Slim instance.
 $container = new Container($configuration);
 
-//Override the default Not Found Handler
-$container['notFoundHandler'] = function ($container) {
-    return function ($request, $response) use ($container) {
-        return $container['view']->render($response, 'error/404.twig')->withStatus(404);
-    };
-};
-
 //	Attach our config to the container using the Noodlehaus Config class.
 $container['config'] = function ($container) {
     return new Config([GLOBAL_ROOT_PATH . '/config' . '/' . MODE . PHP_EXT]);
@@ -61,6 +54,13 @@ $container['view'] = function ($container) {
     ));
     $view->addExtension(new Twig_Extension_Debug());
     return $view;
+};
+
+//Override the default Not Found Handler
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        return $container['view']->render($response, 'error/404.twig')->withStatus(404);
+    };
 };
 
 //	Require Eloquent.
