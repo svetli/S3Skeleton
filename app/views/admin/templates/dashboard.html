@@ -1,0 +1,38 @@
+{% extends 'admin/default.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+{% set brand = 'Dashboard' %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Some random title</h4>
+                        <p class="category">Some random sub title</p>
+                    </div>
+                    <div class="content">
+                        <ul class="list-group">
+                            {% for post in posts %}
+                            <li class="list-group-item clearfix">
+                                <i class="fa fa-file"></i>
+                                {{ post.title }}
+                                <span class="pull-right">
+                                    <a href="{{ urlFor('admin.post.edit', {id: post.id}) }}" data-hover="tooltip" data-placement="bottom" title="Edit Post" class="btn btn-sm btn-success">
+                                        <i class="pe-7s-pen"></i>
+                                    </a>
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="text-center">&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

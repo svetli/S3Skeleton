@@ -1,0 +1,68 @@
+{% extends 'admin/default.html' %}
+{% block title %}User List{% endblock %}
+{% set brand = 'Post List' %}
+{% set subtitle = 'This is all post we have...' %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">{{ brand }}</h4>
+                        <p class="category">{{ subtitle }}</p>
+                    </div>
+                    <div class="content">
+                        {% if posts is empty %}
+                        <img src="assets/img/error/Nothing_to_do_here_by_rober_raik-d4cxltj.png" class="img-responsive img-center">
+                        <h2 class="title">
+                            Nothing to do here...
+                        </h2>
+                        {% else %}
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody>
+                                    {% for post in posts %}
+                                    <tr><p></p>
+                                        <td>{{ post.title }}</td>
+                                        {% if post.status == 1 %}
+                                        <td><span class="label label-primary">Published</span></td>
+                                        {% else %}
+                                        <td><span class="label label-default">Draft</span></td>
+                                        {% endif %}
+                                        <td><a href="{{ urlFor('admin.post.edit', {id: post.id}) }}" data-hover="tooltip" data-placement="bottom" title="Edit Post" class="btn btn-sm btn-success">
+                                            <i class="pe-7s-pen"></i> edit
+                                            </a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                        <hr/>
+                        <nav>
+                            <ul class="pager">
+                                <li class="previous{% if AllPost|length <= 5 %} disabled{% endif %}">
+                                    <a {% if AllPost|length > 5 %}href="{{ urlFor('a.p.l', {'number': 2}) }}"{% endif %}>
+                                        <span aria-hidden="true">&larr;</span> Older
+                                    </a>
+                                </li>
+                                <li class="next disabled">
+                                    <a>Newer
+                                        <span aria-hidden="true">&rarr;</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

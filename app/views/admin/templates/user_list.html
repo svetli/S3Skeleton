@@ -1,0 +1,66 @@
+{% extends 'admin/default.html' %}
+{% block title %}User List{% endblock %}
+{% set brand = 'User List' %}
+{% set subtitle = 'This is all user...' %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">{{ brand }}</h4>
+                        <p class="category">{{ subtitle }}</p>
+                    </div>
+                    <div class="content">
+                        {% if users is empty %}
+                        <p>No registered users</p>
+                        {% else %}
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                </thead>
+                                <tbody>
+                                    {% for user in users %}
+                                    <tr><p></p>
+                                        <td>{{ user.getFullName }}</td>
+                                        <td>{{ user.username }}</td>
+                                        {% if user.isAdmin %}
+                                        <td><span class="label label-primary">Administrator</span></td>
+                                        {% elseif user.isMod %}
+                                        <td><span class="label label-success">Moderator</span></td>
+                                        {% else %}
+                                        <td><span class="label label-default">User</span></td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                        <hr/>
+                        <nav>
+                            <ul class="pager">
+                                <li class="previous {% if number >= pages or number < 1 %}disabled{% endif %}">
+                                    <a {% if number < pages and number >= 1 %}href="{{ urlFor('user_list', {'number': number + 1}) }}"{% endif %}>
+                                        <span aria-hidden="true">&larr;</span> Older
+                                    </a>
+                                </li>
+                                <li class="next {% if number <= 1 or number > pages %}disabled{% endif %}">
+                                    <a {% if number > 1 and number <= pages %}href="{{ urlFor('user_list', {'number': number - 1}) }}"{% endif %}>Newer 
+                                        <span aria-hidden="true">&rarr;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

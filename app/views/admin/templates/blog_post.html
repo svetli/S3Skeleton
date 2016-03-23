@@ -1,0 +1,127 @@
+{% extends 'admin/default.html' %}
+{% block title %}Blog Post{% endblock %}
+{% set brand = 'Write a Post' %}
+{% set myDropText = 'Drag&drop Your files'%}
+{% block head %}
+{{ parent() }}
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+<style type="text/css">.modal-backdrop{position:relative}.note-group-select-from-files{display:none}</style>
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Create a New Blog Post</h4>
+                    </div>
+                    <div class="content">
+                        <form action="{{ urlFor('admin.post.post') }}" method="post" enctype="multipart/form-data" id="myBlog">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="title">Title</label>
+                                        <input type="text" class="form-control" placeholder="Title"{% if request.post('title') %} value="{{ request.post('title') }}"{% endif %} name="title" id="title" required>
+                                        {% if errors.has('title') %}
+                                        <small class="text-danger">
+                                            {{ errors.first('title') }}
+                                        </small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="intro">Intro</label>
+                                        <input type="text" class="form-control" placeholder="Intro" {% if request.post('excerpt') %} value="{{ request.post('excerpt') }}"{% endif %} name="excerpt" id="excerpt" required>
+                                        {% if errors.has('excerpt') %}
+                                        <small class="text-danger">
+                                            {{ errors.first('excerpt') }}
+                                        </small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="content">Content</label>
+                                        <textarea rows="5" class="form-control" placeholder="Here can be your post content" name="content" id="content" required>{% if request.post('content') %}{{ request.post('content') }}{% endif %}</textarea>
+                                        {% if errors.has('content') %}
+                                        <small class="text-danger">
+                                            {{ errors.first('content') }}
+                                        </small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="title">featured picture</label>
+                                        <input type="file" class="form-control" name="my_image" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="title">status</label>
+                                        <label class="checkbox">
+                                            <span class="icons">
+                                                <span class="first-icon fa fa-square-o"></span>
+                                                <span class="second-icon fa fa-check-square-o"></span>
+                                            </span>
+                                            <input type="checkbox" name="status" id="status" data-toggle="checkbox" value="1">
+                                            Publish
+                                        </label>
+                                        <small class="text-muted">
+                                            <i>Check if you want to publish this post now.</i>
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="title">Categories</label>
+                                        <select class="form-control" name="categories">
+                                            {% for cat in categories %}
+                                            <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <button type="submit" class="btn btn-info btn-fill pull-right">
+                                Create Post
+                            </button>
+                            <input type="hidden" name="{{ csrf_key }}" value="{{ csrf_token }}">
+                            <input type="hidden" name="user_id" value="{{ auth.getUserId }}">
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="content">
+                        sdssdsd
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <button href="" class="btn btn-simple">
+                            <i class="fa fa-facebook-square"></i>
+                        </button>
+                        <button href="" class="btn btn-simple">
+                            <i class="fa fa-twitter"></i>
+                        </button>
+                        <button href="" class="btn btn-simple">
+                            <i class="fa fa-google-plus-square"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
