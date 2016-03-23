@@ -102,15 +102,21 @@ $container['validation'] = function ($container) {
 //	Inject our mail feature into the container. Using PHPMailer for now.
 $container['mailer'] = function ($container) {
     $mailer = new PHPMailer;
-
-    $mailer->Host = $container->config->get('mail.host');
-    $mailer->SMTPAuth = $container->config->get('mail.smtp_auth');
-    $mailer->SMTPSecure = $container->config->get('mail.smtp_secure');
-    $mailer->Port = $container->config->get('mail.port');
-    $mailer->Username = $container->config->get('mail.username');
-    $mailer->Password = $container->config->get('mail.password');
+    $mailer->isSMTP();
+    $mailer->Host = $app->config->get('mail.host');
+    $mailer->Port = $app->config->get('mail.port');
     $mailer->SMTPDebug = 1;
-    $mailer->isHTML($container->config->get('mail.html'));
+    $mail->setFrom($app->config->get('mail.setFrom'), $app->config->get('mail.sender'));
+    $mailer->isHTML($container->config->get('mail.html'));  
+    $mailer->SMTPOptions = [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        ]
+    ];
+    
+    
 
     return new Mailer($container->view, $mailer);
 };
