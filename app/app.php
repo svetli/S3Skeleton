@@ -32,12 +32,14 @@ session_cache_limiter(false);
 session_start();
 //	Autoload the dependencies.
 require(GLOBAL_ROOT_PATH . '/vendor/autoload' . PHP_EXT);
+
 //	This setting manages the Slim debugging. Set to false for production environments.
 $configuration = [
     'settings' => [
         'displayErrorDetails' => true
     ]
 ];
+
 //	We need to set up the container before creating our Slim instance.
 $container = new Container($configuration);
 
@@ -45,6 +47,7 @@ $container = new Container($configuration);
 $container['config'] = function ($container) {
     return new Config([GLOBAL_ROOT_PATH . '/config' . '/' . MODE . PHP_EXT]);
 };
+
 //	Setup the Twig views.
 $container['view'] = function ($container) {
     $view = new Twig(GLOBAL_ROOT_PATH . '/app/views');
@@ -64,7 +67,6 @@ $container['notFoundHandler'] = function ($container) {
 };
 
 //	Require Eloquent.
-
 require(GLOBAL_ROOT_PATH . '/app/database' . PHP_EXT);
 
 //	Inject our user model into the container.
@@ -77,7 +79,7 @@ $container['post'] = function ($container) {
     return new Post;
 };
 
-//	Inject our post model into the container.
+//	Inject our category model into the container.
 $container['category'] = function ($container) {
     return new Category;
 };
@@ -106,7 +108,7 @@ $container['mailer'] = function ($container) {
     $mailer->Host = $app->config->get('mail.host');
     $mailer->Port = $app->config->get('mail.port');
     $mailer->SMTPDebug = 1;
-    $mail->setFrom($app->config->get('mail.setFrom'), $app->config->get('mail.sender'));
+    $mailer->setFrom($app->config->get('mail.setFrom'), $app->config->get('mail.sender'));
     $mailer->isHTML($container->config->get('mail.html'));  
     $mailer->SMTPOptions = [
         'ssl' => [
@@ -116,8 +118,6 @@ $container['mailer'] = function ($container) {
         ]
     ];
     
-    
-
     return new Mailer($container->view, $mailer);
 };
 
@@ -137,7 +137,6 @@ $app = new App($container);
 //	in the opposite order they're added from here. So the middleware at the bottom of the
 //	file happens first.
 //	Remove any trailing slashes from the uri.
-
 $app->add(function (Request $request, Response $response, callable $next) {
     $uri = $request->getUri();
     $path = $uri->getPath();
@@ -231,7 +230,6 @@ $app->add(function ($request, $response, $next) {
 });
 
 //	CSRF protection.
-
 $app->add(function ($request, $response, $next) {
     //	Grab the key from our config.
     $key = $this->config->get('csrf.key');
