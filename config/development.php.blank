@@ -26,15 +26,16 @@ return
         'session' => 'user_id',
         'remember' => 'user_r'
     ],
-    'mail' =>
-    [
-        'smtp_auth' => true,
-        'smtp_secure' => 'ssl',
-        'host' => '',
+    'mail' => [
+        'smtp_auth' => false,
+        'smtp_secure' => 'tls',
+        'host' => '127.0.0.1',
         'username' => '',
         'password' => '',
-        'port' => 465,
-        'html' => true
+        'port' => 25,
+        'html' => true,
+        'setFrom' => 'info@domain.com',
+        'sender' => 'No Reply'
     ],
     'twig' =>
     [
