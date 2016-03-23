@@ -105,10 +105,10 @@ $container['validation'] = function ($container) {
 $container['mailer'] = function ($container) {
     $mailer = new PHPMailer;
     $mailer->isSMTP();
-    $mailer->Host = $app->config->get('mail.host');
-    $mailer->Port = $app->config->get('mail.port');
+    $mailer->Host = $container->config->get('mail.host');
+    $mailer->Port = $container->config->get('mail.port');
     $mailer->SMTPDebug = 1;
-    $mailer->setFrom($app->config->get('mail.setFrom'), $app->config->get('mail.sender'));
+    $mailer->setFrom($container->config->get('mail.setFrom'), $container->config->get('mail.sender'));
     $mailer->isHTML($container->config->get('mail.html'));  
     $mailer->SMTPOptions = [
         'ssl' => [
