@@ -9,6 +9,7 @@ if (!defined('IN_PROJECT'))
 }
 
 require(GLOBAL_ROOT_PATH . '/app/routes/auth/auth_routes' . PHP_EXT);
+require(GLOBAL_ROOT_PATH . '/app/routes/admin/admin_routes' . PHP_EXT);
 
 $app->get('/', function ($request, $response)  use ($container) {
 
