@@ -171,10 +171,8 @@ $app->add(function ($request, $response, $next) {
         $this->auth = false;
     }
 
-    //	Pass data to all views. Auth is self-explanatory, baseUrl is just the domain so that we can generate
-    //	correct links in our views.
+    //	Pass data to all views. Auth is self-explanatory.
     $this->view['auth'] = $this->auth;
-    $this->view['baseUrl'] = $this->config->get('app.url');
 
     return $next($request, $response);
 });

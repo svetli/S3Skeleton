@@ -100,7 +100,7 @@ $app->post('/login', function ($request, $response) {
             $this->flash->addMessage('global', 'You are now singned in');
 
             //	Redirect the user to the homepage now that they're logged in.
-            return $response->withRedirect($this->router->pathFor('home'));
+            return $response->withRedirect($this->router->pathFor('admin'));
         }
         else
         {
