@@ -8,9 +8,6 @@
 //	routes where users are required to either be a guest or be authenticated to view
 //	the pages.
 
-use App\Common\User;
-use App\Common\User\UserPermission;
-
 /**
 * Requires the user to be authenticated to view the route.
 */
