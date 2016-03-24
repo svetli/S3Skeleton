@@ -27,6 +27,7 @@ $app->get('/', function ($request, $response)  use ($container) {
         'posts'     => $posted,
         'AllPost'   => $PostAll
     ]);
+
 })->setName('home');
 
 $app->get('/post/[{id:[0-9]+}/[{name:[A-Za-z-]+}]]', function ($request, $response, $args)  use ($container) {

@@ -8,10 +8,13 @@
 //	routes where users are required to either be a guest or be authenticated to view
 //	the pages.
 
+use App\Common\User;
+use App\Common\User\UserPermission;
+
 /**
 * Requires the user to be authenticated to view the route.
 */
-$authenticated = function ($request, $response, $next) {
+$authenticated = function ($request, $response, $next){
     if (!$this->auth)
     {
         return $response->withRedirect($this->router->pathFor('home'));
@@ -29,37 +32,3 @@ $guest = function ($request, $response, $next) {
     }
     return $next($request, $response);
 };
-
-/**
-* Requires the user to be an admin to view the route.
-*/
-$admin = function ($request, $response, $next) {
-    if (!$this->auth || !$this->auth->isAdmin())
-    {
-        return $response->withRedirect($this->router->pathFor('home'));
-    }
-    return $next($request, $response);
-};
-
-/**
-* Requires the user to be a mod to view the route.
-*/
-$mod = function ($request, $response, $next) {
-    if (!$this->auth || !$this->auth->isMod())
-    {
-        return $response->withRedirect($this->router->pathFor('home'));
-    }
-    return $next($request, $response);
-};
-
-/**
-* Requires the user to be an admin or a mod to view the route.
-*/
-$both = function ($request, $response, $next) {
-    if (!$this->auth || !$this->auth->isMod() || !$this->auth->isAdmin())
-    {
-        return $response->withRedirect($this->router->pathFor('home'));
-    }
-    return $next($request, $response);
-};
-
