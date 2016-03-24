@@ -16,7 +16,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="position">Position</label>
-                                        <input type="text" class="form-control" placeholder="Position"{% if auth.position is not empty %} value="{{ auth.position }}"{% endif %} name="position" id="position">
+                                        <input type="text" class="form-control" placeholder="Position"{% if user.position is not empty %} value="{{ user.position }}"{% endif %} name="position" id="position">
                                         {% if errors.has('position') %}
                                         <small class="text-danger">
                                             {{ errors.first('position') }}
@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email address</label>
-                                        <input type="email" class="form-control" placeholder="Email"{% if auth.email is not empty %} value="{{ auth.email }}"{% endif %} name="email" id="email" disabled>
+                                        <input type="email" class="form-control" placeholder="Email"{% if user.email is not empty %} value="{{ user.email }}"{% endif %} name="email" id="email" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name">First Name</label>
-                                        <input type="text" class="form-control" placeholder="First Name"{% if auth.getFirstName is not empty %} value="{{ auth.getFirstName }}"{% endif %} name="first_name" id="first_name">
+                                        <input type="text" class="form-control" placeholder="First Name"{% if user.getFirstName is not empty %} value="{{ user.getFirstName }}"{% endif %} name="first_name" id="first_name">
                                         {% if errors.has('first_name') %}
                                         <small class="text-danger">
                                             {{ errors.first('first_name') }}
@@ -46,7 +46,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="last_name">Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name"{% if auth.getLastName is not empty %} value="{{ auth.getLastName }}"{% endif %} name="last_name" id="last_name">
+                                        <input type="text" class="form-control" placeholder="Last Name"{% if user.getLastName is not empty %} value="{{ user.getLastName }}"{% endif %} name="last_name" id="last_name">
                                         {% if errors.has('last_name') %}
                                         <small class="text-danger">
                                             {{ errors.first('last_name') }}
@@ -59,7 +59,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="about_me">About Me</label>
-                                        <textarea rows="5" class="form-control" placeholder="Here can be your description" name="about_me" id="about_me">{{ auth.about_me }}</textarea>
+                                        <textarea rows="5" class="form-control" placeholder="Here can be your description" name="about_me" id="about_me">{{ user.about_me }}</textarea>
                                         {% if errors.has('about_me') %}
                                         <small class="text-danger">
                                             {{ errors.first('about_me') }}
@@ -84,13 +84,13 @@
                     </div>
                     <div class="content">
                         <div class="author">
-                            <img class="avatar border-gray" src="{{ auth.getAvatarUrl({size: 200}) }}" alt="{{ user.getFullNameOrUsername }}'s avatar">
-                            <h4 class="title">{{ auth.getFullName }}<br />
-                                <small>{{ auth.username }}</small>
+                            <img class="avatar border-gray" src="{{ user.getAvatarUrl({size: 200}) }}" alt="{{ user.getFullNameOrUsername }}'s avatar">
+                            <h4 class="title">{{ user.getFullName }}<br />
+                                <small>{{ user.username }}</small>
                             </h4>
                         </div>
                         <p class="description text-center">
-                            {{ auth.about_me }}
+                            {{ user.about_me }}
                         </p>
                     </div>
                     <hr>

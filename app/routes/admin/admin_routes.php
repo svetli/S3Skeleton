@@ -38,7 +38,8 @@ $app->get('/dash/u/{username}', function ($request, $response, $args)  use ($con
     }
 
     return $this->view->render($response, 'admin/templates/user.html', [
-        'messages' => $messages
+        'user'      => $user,
+        'messages'  => $messages
     ]);
 
 })->setName('user-profile')->add($authenticated);
