@@ -109,7 +109,7 @@ $container['mailer'] = function ($container) {
     $mailer->Port = $container->config->get('mail.port');
     $mailer->SMTPDebug = 1;
     $mailer->setFrom($container->config->get('mail.setFrom'), $container->config->get('mail.sender'));
-    $mailer->isHTML($container->config->get('mail.html'));  
+    $mailer->isHTML($container->config->get('mail.html'));
     $mailer->SMTPOptions = [
         'ssl' => [
             'verify_peer' => false,
@@ -117,7 +117,7 @@ $container['mailer'] = function ($container) {
             'allow_self_signed' => true
         ]
     ];
-    
+
     return new Mailer($container->view, $mailer);
 };
 
