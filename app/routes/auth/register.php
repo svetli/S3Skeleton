@@ -55,7 +55,7 @@ $app->post('/register', function ($request, $response, $args) {
             'active_hash' 	=> $this->hash->hash($identifier)
         ]);
 
-        // User Permissions
+        // Set user permissions
         $user->permissions()->create(UserPermission::$defaults);
 
         //	Send the user an email with a link to activate their account. Link is generated in the template.
