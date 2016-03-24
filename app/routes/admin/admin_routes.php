@@ -44,7 +44,7 @@ $app->get('/dash/u/{username}', function ($request, $response, $args)  use ($con
 
 })->setName('user-profile')->add($authenticated);
 
-$app->post('/dash/u/{username:[A-Za-z-]+}', function ($request, $response, $args)  use ($container) {
+$app->post('/dash/u/{username}', function ($request, $response, $args)  use ($container) {
 
 echo 'posted';
 
