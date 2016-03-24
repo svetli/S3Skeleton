@@ -21,7 +21,8 @@
         "alexgarrett/violin": "2.2.2",
         "ircmaxell/random-lib": "1.1.0",
         "phpmailer/phpmailer": "5.2.14",
-        "codeguy/upload": "dev-master"
+        "codeguy/upload": "dev-master",
+        "slim/flash": "^0.1.0"
     },
     "autoload": {
         "psr-4": {

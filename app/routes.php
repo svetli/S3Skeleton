@@ -12,6 +12,9 @@ require(GLOBAL_ROOT_PATH . '/app/routes/auth/auth_routes' . PHP_EXT);
 
 $app->get('/', function ($request, $response)  use ($container) {
 
+    // Get flash messages from previous request
+    $messages = $this->flash->getMessages();
+
     $PostAll = $container->post
         ->where('status', 1)
         ->orderBy('id', 'desc')
@@ -25,7 +28,8 @@ $app->get('/', function ($request, $response)  use ($container) {
 
     return $this->view->render($response, 'home.twig', [
         'posts'     => $posted,
-        'AllPost'   => $PostAll
+        'AllPost'   => $PostAll,
+        'messages' => $messages
     ]);
 
 })->setName('home');

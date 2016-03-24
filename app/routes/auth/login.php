@@ -6,8 +6,14 @@
 use Carbon\Carbon;
 
 $app->get('/login', function ($request, $response) {
+
+    // Get flash messages from previous request
+    $messages = $this->flash->getMessages();
+
     //	Simply render the login page.
-    return $this->view->render($response, 'auth/login.twig');
+    return $this->view->render($response, 'auth/login.twig',[
+        'messages' => $messages
+    ]);
 })->setName('login')->add($guest);
 
 $app->post('/login', function ($request, $response) {
@@ -90,11 +96,17 @@ $app->post('/login', function ($request, $response) {
             //	Set the session key via our config with the value being the user's id number.
             $_SESSION[$this->config->get('auth.session')] = $user->id;
 
+            // Flash Message
+            $this->flash->addMessage('global', 'You are now singned in');
+
             //	Redirect the user to the homepage now that they're logged in.
             return $response->withRedirect($this->router->pathFor('home'));
         }
         else
         {
+            // Flash Message
+            $this->flash->addMessage('global', 'Could not log you in');
+
             //	Redirect the user to the login page now that they're not logged in.
             return $response->withRedirect($this->router->pathFor('login'));
         }

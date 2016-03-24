@@ -26,6 +26,8 @@ $app->get('/password-reset', function ($request, $response) {
     //		in the database?
     if (!$user || !$user->password_recover || !$this->hash->hashCheck($user->password_recover, $hashed_identifier))
     {
+        // Flash Message
+        $this->flash->addMessage('global', 'We have problem reseting your password... ');
         return $response->withRedirect($this->router->pathFor('home'));
     }
 
@@ -66,6 +68,8 @@ $app->post('/password-reset', function ($request, $response) {
     //		in the database?
     if (!$user || !$user->password_recover || !$this->hash->hashCheck($user->password_recover, $hashed_identifier))
     {
+        // Flash Message
+        $this->flash->addMessage('global', 'We have problem reseting your password... ');
         return $response->withRedirect($this->router->pathFor('home'));
     }
 
@@ -89,6 +93,9 @@ $app->post('/password-reset', function ($request, $response) {
             'password' 			=> $this->hash->password($password),
             'password_recover' 	=> null
         ]);
+
+        // Flash Message
+        $this->flash->addMessage('global', 'Your password has been reset and you can now sign in');
 
         //	Redirect the user to the homepage.
         return $response->withRedirect($this->router->pathFor('home'));

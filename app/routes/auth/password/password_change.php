@@ -55,6 +55,9 @@ $app->post('/change-password', function ($request, $response) {
             $message->subject('You changed your password');
         });
 
+        // Flash Message
+        $this->flash->addMessage('global', 'You Changed Your Password');
+
         //	Redirect the user to the homepage.
         return $response->withRedirect($this->router->pathFor('home'));
     }

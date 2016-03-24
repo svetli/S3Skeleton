@@ -26,8 +26,19 @@ $app->get('/activate', function($request, $response) {
     {
         //	Since our conditions were met, we can safely activate the user's account.
         $user->activateAccount();
-    }
 
-    //	Regardless of whether the conditions were met, we want to redirect the user to the homepage.
-    return $response->withRedirect($this->router->pathFor('home'));
+        // Flash Message
+        $this->flash->addMessage('global', 'Your account has been activated and you can sign in');
+
+        //	Regardless of whether the conditions were met, we want to redirect the user to the homepage.
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
+    else
+    {
+        // Flash Message
+        $this->flash->addMessage('global', 'There was a problem activating your account');
+
+        //	Regardless of whether the conditions were met, we want to redirect the user to the homepage.
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
 })->setName('activate')->add($guest);

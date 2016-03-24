@@ -14,6 +14,9 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" type="image/x-icon" href="{{ base_url }}/favicon.ico" sizes="16x16 24x24 32x32 48x48" />
         <link rel="icon" type="image/x-icon" href="{{ base_url }}/favicon.ico" sizes="16x16 24x24 32x32 48x48" />
+        <script src="{{ base_url }}/js/jquery.js"></script>
+        <script src="{{ base_url }}/js/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ base_url }}/css/sweetalert.css">
         <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -59,8 +62,8 @@
                 </div>
             </div>
         </footer>
-        <script src="{{ base_url }}/js/jquery.js"></script>
         <script src="{{ base_url }}/js/bootstrap.min.js"></script>
         <script src="{{ base_url }}/js/clean-blog.min.js"></script>
+        {% if messages %}<script type="text/javascript">$(document).ready(function(){swal("Hi there!", "{{ messages.global.0 }}", "info");});</script>{% endif %}
     </body>
 </html>

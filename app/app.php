@@ -107,7 +107,7 @@ $container['mailer'] = function ($container) {
     $mailer->isSMTP();
     $mailer->Host = $container->config->get('mail.host');
     $mailer->Port = $container->config->get('mail.port');
-    $mailer->SMTPDebug = 1;
+    $mailer->SMTPDebug = 0;
     $mailer->setFrom($container->config->get('mail.setFrom'), $container->config->get('mail.sender'));
     $mailer->isHTML($container->config->get('mail.html'));
     $mailer->SMTPOptions = [
@@ -125,6 +125,11 @@ $container['mailer'] = function ($container) {
 $container['randomlib'] = function ($container) {
     $factory = new Factory;
     return $factory->getMediumStrengthGenerator();
+};
+
+// Register provider
+$container['flash'] = function () {
+    return new \Slim\Flash\Messages();
 };
 
 //	Include our route-specific middleware.

@@ -59,10 +59,15 @@ $app->post('/register', function ($request, $response, $args) {
         $user->permissions()->create(UserPermission::$defaults);
 
         //	Send the user an email with a link to activate their account. Link is generated in the template.
-        $this->mailer->send('templates/email/registered.twig', ['user' => $user, 'identifier' => $identifier], function ($message) use ($user) {
+        $this->mailer->send('templates/email/registered.twig', [
+            'user' => $user,
+            'identifier' => $identifier
+        ], function ($message) use ($user) {
             $message->to($user->email);
             $message->subject('Confirmation of registration.');
         });
+        // Flash Message
+        $this->flash->addMessage('global', 'You have been registered');
 
         //	Redirect the user to the homepage.
         return $response->withRedirect($this->router->pathFor('home'));

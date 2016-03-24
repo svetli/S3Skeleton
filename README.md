@@ -9,7 +9,7 @@ Most of the work is thanks to [Joey Altman](https://www.codecourse.com/@Hero). :
 
 #### TODO
 
-- [ ] Flashing messages
+- [x] ~~Flashing messages~~
 - [ ] User profiles
 - [ ] User list
 - [ ] Permissions

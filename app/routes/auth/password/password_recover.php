@@ -53,10 +53,16 @@ $app->post('/recover-password', function($request, $response) {
             //	Send the account owner  an email with a link to the recovery form for their account.
             //	The link will be generated in the email template using the user and identifier parameters
             //	we pass in the array.
-            $this->mailer->send('templates/email/password_recover.twig', ['user' => $user, 'identifier' => $identifier], function ($message) use ($user) {
+            $this->mailer->send('templates/email/password_recover.twig', [
+                'user' => $user,
+                'identifier' => $identifier
+            ], function ($message) use ($user) {
                 $message->to($user->email);
                 $message->subject('Password recovery request');
             });
+
+            // Flash Message
+            $this->flash->addMessage('global', 'We have emailed you instructions to reset your password');
 
             //	Redirect to the homepage.
             return $response->withRedirect($this->router->pathFor('home'));
