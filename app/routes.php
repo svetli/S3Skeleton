@@ -46,17 +46,16 @@ $app->get('/post/[{id:[0-9]+}/[{name:[A-Za-z-]+}]]', function ($request, $respon
         ->where('id','=', "$id")
         ->where('seo_url', '=',"$name")
         ->first();
-    if ($posted)
-    {
-        return $this->view->render($response, 'templates/post_detail.twig', [
-            'post'     => $posted
-        ]);
-    }
-    else
+
+    if (!$posted)
     {
         // TODO
         // Handle 404 for now, redirect to home
         return $response->withRedirect($this->router->pathFor('home'));
     }
+
+    return $this->view->render($response, 'templates/post_detail.twig', [
+        'post'     => $posted
+    ]);
 
 })->setName('post.detail');

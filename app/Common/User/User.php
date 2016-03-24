@@ -4,7 +4,7 @@
 */
 
 namespace App\Common\User;
-use App\Common\User\UserPermission;
+
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent
@@ -107,8 +107,7 @@ class User extends Eloquent
     */
     public function getAvatarUrl($options = [])
     {
-        //$size = isset($options['size']) ? $options['size'] : 45;
-        $size = 45;
+        $size = isset($options['size']) ? $options['size'] : 45;
         return 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=' . $size . '&d=mm';
     } //End getAvatarUrl
 
