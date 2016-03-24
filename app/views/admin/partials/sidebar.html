@@ -1,28 +1,20 @@
-<div class="sidebar" data-color="azure" data-image="{{ baseUrl() }}/assets/img/sidebar-1.jpg">
+<div class="sidebar" data-color="azure" data-image="{{ base_url }}/img/sidebar-1.jpg">
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="{{ baseUrl() }}" class="simple-text">
+            <a href="{{ base_url }}" class="simple-text">
 
             </a>
         </div>
         <ul class="nav">
             <li>
-                <a href="{{ urlFor('admin') }}">
+                <a href="{{ path_for('admin') }}">
                     <i class="pe-7s-graph"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <!--
-<li>
-<a href="{{ urlFor('my.profile', {username: auth.username}) }}">
-<i class="pe-7s-user"></i>
-<p>My Profile</p>
-</a>
-</li>
--->
             {% if auth.isAdmin %}
             <li>
-                <a href="{{ urlFor('user.list') }}">
+                <a href="#0">
                     <i class="pe-7s-note2"></i>
                     <p>User List</p>
                 </a>
@@ -30,13 +22,13 @@
             {% endif %}
             {% if auth.isAdmin or auth.isMod %}
             <li>
-                <a href="{{ urlFor('admin.post') }}">
+                <a href="#0">
                     <i class="pe-7s-news-paper"></i>
                     <p>Write New Posts</p>
                 </a>
             </li>
             <li>
-                <a href="{{ urlFor('admin.p.l') }}">
+                <a href="#0">
                     <i class="pe-7s-note2"></i>
                     <p>Posts List</p>
                 </a>

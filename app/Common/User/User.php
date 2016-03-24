@@ -4,7 +4,7 @@
 */
 
 namespace App\Common\User;
-
+use App\Common\User\UserPermission;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent
@@ -175,7 +175,7 @@ class User extends Eloquent
     */
     public function permissions()
     {
-        return $this->hasMany('\App\Common\User\UserPermission', 'user_id');
+        return $this->hasOne('\App\Common\User\UserPermission', 'user_id');
     } // End permissions
 
     /**
