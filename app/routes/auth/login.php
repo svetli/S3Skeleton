@@ -93,6 +93,11 @@ $app->post('/login', function ($request, $response) {
             //	Redirect the user to the homepage now that they're logged in.
             return $response->withRedirect($this->router->pathFor('home'));
         }
+        else
+        {
+            //	Redirect the user to the login page now that they're not logged in.
+            return $response->withRedirect($this->router->pathFor('login'));
+        }
     }
 
     //	Since our validation didn't pass, we want to reload the page passing
