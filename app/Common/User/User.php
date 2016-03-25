@@ -140,8 +140,19 @@ class User extends Eloquent
     /**
     * Returns the user's permission
     *
-    * @return bool
+    * @return
     */
+    public function permissions()
+    {
+        return $this->hasOne('\App\Common\User\UserPermission', 'user_id');
+    } // End permissions
+
+	/**
+	* Checks whether the $permission column of the user_permissions table is true or false.
+	*
+	* @param string $permission 	The name of the permission to check for.
+	* @return bool 					True if the user has the permission, false otherwise.
+	*/
     public function hasPermission($permission)
     {
         return (bool) $this->permissions->{$permission};
@@ -168,14 +179,15 @@ class User extends Eloquent
     } // End isMod
 
     /**
-    * Returns the user's permission
+    * Returns the user is admin or mod
     *
-    * @return
+    * 
     */
-    public function permissions()
+    
+    public function isAdminOrMod()
     {
-        return $this->hasOne('\App\Common\User\UserPermission', 'user_id');
-    } // End permissions
+        return $this->isAdmin() || $this->isMod();
+    } // End isAdminOrMod
 
     /**
     * Returns the user's post
