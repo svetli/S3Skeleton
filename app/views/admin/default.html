@@ -80,5 +80,13 @@
             });
         });
     </script>
+    {% if messages %}
+    <script type="text/javascript">
+        $(document).ready(
+            function(){
+            swal("Hi there!", "{{ messages.global.0 }}", "info");
+        });
+    </script>
+    {% endif %}
     {% if messages %}<script type="text/javascript">$(document).ready(function(){swal("Hi there!", "{{ messages.global.0 }}", "info");});</script>{% endif %}
 </html>
