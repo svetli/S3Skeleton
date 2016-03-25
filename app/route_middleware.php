@@ -29,3 +29,11 @@ $guest = function ($request, $response, $next) {
     }
     return $next($request, $response);
 };
+
+$both = function ($request, $response, $next) {
+     if (!$this->auth || !$this->auth->isAdminOrMod())
+     {
+         return $response->withRedirect($this->router->pathFor('home'));
+     }
+     return $next($request, $response);
+ };
