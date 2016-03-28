@@ -29,7 +29,9 @@ Most of the work is thanks to [Joey Altman](https://www.codecourse.com/@Hero). :
 - [x] ~~Flashing messages~~
 - [ ] User profiles
 - [ ] User list
-- [ ] Permissions
+- [x] ~~Permissions~~
 - [ ] Handle redirect to Error 404
+- [ ] Blog post w/ images
+- [ ] Slider Images
 
 
