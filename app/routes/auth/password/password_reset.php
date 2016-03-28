@@ -20,11 +20,11 @@ $app->get('/password-reset', function ($request, $response) {
 
     //	Perform three checks here. If any fail, redirect the user to the homepage.
     //	1) 	Does the user exist?
-    //	2) 	Does the user have a non-null password_recover column? (This means the user has an open password
+    //	2) 	Does the user have a non-null recover_hash column? (This means the user has an open password
     //		recovery request.)
     //	3) 	Does the hashed version of the identifier taken from the url match the recover identifier stored
     //		in the database?
-    if (!$user || !$user->password_recover || !$this->hash->hashCheck($user->password_recover, $hashed_identifier))
+    if (!$user || !$user->recover_hash || !$this->hash->hashCheck($user->recover_hash, $hashed_identifier))
     {
         // Flash Message
         $this->flash->addMessage('global', 'We have problem reseting your password... ');
@@ -62,11 +62,11 @@ $app->post('/password-reset', function ($request, $response) {
 
     //	Perform three checks here. If any fail, redirect the user to the homepage.
     //	1) 	Does the user exist?
-    //	2) 	Does the user have a non-null password_recover column? (This means the user has an open password
+    //	2) 	Does the user have a non-null recover_hash column? (This means the user has an open password
     //		recovery request.)
     //	3) 	Does the hashed version of the identifier taken from the url match the recover identifier stored
     //		in the database?
-    if (!$user || !$user->password_recover || !$this->hash->hashCheck($user->password_recover, $hashed_identifier))
+    if (!$user || !$user->recover_hash || !$this->hash->hashCheck($user->recover_hash, $hashed_identifier))
     {
         // Flash Message
         $this->flash->addMessage('global', 'We have problem reseting your password... ');
@@ -91,7 +91,7 @@ $app->post('/password-reset', function ($request, $response) {
         //	request being submitted.
         $user->update([
             'password' 			=> $this->hash->password($password),
-            'password_recover' 	=> null
+            'recover_hash' 	=> null
         ]);
 
         // Flash Message
