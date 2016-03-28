@@ -7,11 +7,11 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-    PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -19,20 +19,20 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `title` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-    `excerpt` tinytext COLLATE utf8_unicode_ci NOT NULL,
-    `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-    `body` longtext COLLATE utf8_unicode_ci NOT NULL,
-    `status` tinyint(1) NOT NULL,
-    `user_id` int(11) DEFAULT NULL,
-    `category_id` int(11) DEFAULT NULL,
-    `seo_url` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-    PRIMARY KEY (`id`),
-    KEY `user_post_idx` (`user_id`),
-    CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `excerpt` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `body` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `seo_url` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `user_post_idx` (`user_id`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `posts` (`id`, `title`, `excerpt`, `image`, `body`, `status`, `user_id`, `category_id`, `seo_url`, `created_at`, `updated_at`) VALUES
@@ -40,22 +40,22 @@ INSERT INTO `posts` (`id`, `title`, `excerpt`, `image`, `body`, `status`, `user_
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-    `first_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `last_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-    `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-    `about_me` tinytext COLLATE utf8_unicode_ci NOT NULL,
-    `is_active` tinyint(1) DEFAULT NULL,
-    `active_hash` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `recover_hash` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `remember_identifier` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `remember_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-    `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-    `updated_at` timestamp NULL DEFAULT NULL,
-    PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `about_me` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `active_hash` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `recover_hash` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `remember_identifier` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `about_me`, `is_active`, `active_hash`, `recover_hash`, `remember_identifier`, `remember_token`, `position`, `created_at`, `updated_at`) VALUES
@@ -63,16 +63,16 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `pass
 
 DROP TABLE IF EXISTS `users_permissions`;
 CREATE TABLE `users_permissions` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) unsigned NOT NULL,
-    `is_admin` tinyint(1) unsigned NOT NULL,
-    `is_mod` tinyint(1) unsigned NOT NULL,
-    `created_at` timestamp NULL DEFAULT NULL,
-    `updated_at` timestamp NULL DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `is_admin` tinyint(1) unsigned NOT NULL,
+  `is_mod` tinyint(1) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `users_permissions` (`id`, `user_id`, `is_admin`, `is_mod`, `created_at`, `updated_at`) VALUES
 (1,	1,	1,	1,	'2016-02-16 15:42:16',	'2016-02-16 15:42:16');
 
--- 2016-03-23 02:05:07
+-- 2016-03-28 17:45:05
