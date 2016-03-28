@@ -41,7 +41,7 @@
                                         {% endif %}
                                         <td>
                                             <span>
-                                                <a href="#0" data-hover="tooltip" data-placement="bottom" title="Edit User" class="btn btn-sm btn-success pe-7s-pen"></a>
+                                                <a href="{{ path_for('user-profile', {'username': user.getUsername}) }}" data-hover="tooltip" data-placement="bottom" title="Edit User" class="btn btn-sm btn-success pe-7s-pen"></a>
                                                 {% if user.getId == 1 %}
                                                 <a href="#0" data-hover="tooltip" data-placement="bottom" title="You Can't Delete This User" class="btn btn-sm btn-danger pe-7s-close-circle" disabled="disabled"></a>
                                                 {% else %}
