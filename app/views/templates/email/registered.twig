@@ -1,6 +1,7 @@
 {% extends 'templates/email/default.twig' %}
 {% block content %}
-	<p>You have registered.</p>
-	
-	<p>Active your account using this link: {{ baseUrl }}{{ path_for('activate')}}?email={{ user.email }}&identifier={{ identifier|url_encode }}</p>
+<p class="lead">You have registered.</p>
+<p class="callout">
+    Active your account using <a href="{{ base_url }}{{ path_for('activate')}}?email={{ user.email }}&identifier={{ identifier|url_encode }}">this link</a>
+</p>
 {% endblock %}

@@ -107,7 +107,7 @@ $container['mailer'] = function ($container) {
     $mailer->isSMTP();
     $mailer->Host = $container->config->get('mail.host');
     $mailer->Port = $container->config->get('mail.port');
-    $mailer->SMTPDebug = 0;
+    $mailer->SMTPDebug = 1;
     $mailer->setFrom($container->config->get('mail.setFrom'), $container->config->get('mail.sender'));
     $mailer->isHTML($container->config->get('mail.html'));
     $mailer->SMTPOptions = [
