@@ -27,8 +27,9 @@ Most of the work is thanks to [Joey Altman](https://www.codecourse.com/@Hero). :
 #### TODO
 
 - [x] ~~Flashing messages~~
-- [ ] User profiles
-- [ ] User list
+- [x] ~~User profiles~~
+- [x] ~~User list~~
+- [ ] User Edit (add or remove permissions).
 - [x] ~~Permissions~~
 - [ ] Handle redirect to Error 404
 - [ ] Blog post w/ images

@@ -30,6 +30,16 @@ class User extends Eloquent
     *
     * @return string 	The username.
     */
+    public function getId()
+    {
+        return $this->id;
+    } //End getUsername
+
+    /**
+    * Returns the user's username/displayname
+    *
+    * @return string 	The username.
+    */
     public function getUsername()
     {
         return $this->username;

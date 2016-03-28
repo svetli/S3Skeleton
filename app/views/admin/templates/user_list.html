@@ -13,15 +13,14 @@
                         <p class="category">{{ subtitle }}</p>
                     </div>
                     <div class="content">
-                        {% if users is empty %}
-                        <p>No registered users</p>
-                        {% else %}
                         <div class="content table-responsive table-full-width">
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped table-condensed">
                                 <thead>
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Level</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </thead>
                                 <tbody>
                                     {% for user in users %}
@@ -35,22 +34,36 @@
                                         {% else %}
                                         <td><span class="label label-default">User</span></td>
                                         {% endif %}
+                                        {% if user.is_active == 1 %}
+                                        <td><span class="label label-default">Active</span></td>
+                                        {% else %}
+                                        <td><span class="label label-default">Inactive</span></td>
+                                        {% endif %}
+                                        <td>
+                                            <span>
+                                                <a href="#0" data-hover="tooltip" data-placement="bottom" title="Edit User" class="btn btn-sm btn-success pe-7s-pen"></a>
+                                                {% if user.getId == 1 %}
+                                                <a href="#0" data-hover="tooltip" data-placement="bottom" title="You Can't Delete This User" class="btn btn-sm btn-danger pe-7s-close-circle" disabled="disabled"></a>
+                                                {% else %}
+                                                <a href="#0" data-hover="tooltip" data-placement="bottom" title="Delete User" class="btn btn-sm btn-danger pe-7s-close-circle"></a>
+                                                {% endif %}
+                                            </span>
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
                         </div>
-                        {% endif %}
                         <hr/>
                         <nav>
                             <ul class="pager">
                                 <li class="previous {% if number >= pages or number < 1 %}disabled{% endif %}">
-                                    <a {% if number < pages and number >= 1 %}href="{{ urlFor('user_list', {'number': number + 1}) }}"{% endif %}>
+                                    <a {% if number < pages and number >= 1 %}href="{{ path_for('user_list', {'number': number + 1}) }}" {% endif %}>
                                         <span aria-hidden="true">&larr;</span> Older
                                     </a>
                                 </li>
                                 <li class="next {% if number <= 1 or number > pages %}disabled{% endif %}">
-                                    <a {% if number > 1 and number <= pages %}href="{{ urlFor('user_list', {'number': number - 1}) }}"{% endif %}>Newer 
+                                    <a {% if number > 1 and number <= pages %}href="{{ path_for('user_list', {'number': number - 1}) }}"{% endif %}>Newer
                                         <span aria-hidden="true">&rarr;</span>
                                     </a>
                                 </li>
