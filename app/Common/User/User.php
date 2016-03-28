@@ -18,7 +18,7 @@ class User extends Eloquent
         'email',
         'username',
         'password',
-        'password_recover',
+        'recover_hash',
         'is_active',
         'active_hash',
         'remember_identifier',
@@ -147,12 +147,12 @@ class User extends Eloquent
         return $this->hasOne('\App\Common\User\UserPermission', 'user_id');
     } // End permissions
 
-	/**
-	* Checks whether the $permission column of the user_permissions table is true or false.
-	*
-	* @param string $permission 	The name of the permission to check for.
-	* @return bool 					True if the user has the permission, false otherwise.
-	*/
+    /**
+    * Checks whether the $permission column of the user_permissions table is true or false.
+    *
+    * @param string $permission 	The name of the permission to check for.
+    * @return bool 					True if the user has the permission, false otherwise.
+    */
     public function hasPermission($permission)
     {
         return (bool) $this->permissions->{$permission};
@@ -181,9 +181,9 @@ class User extends Eloquent
     /**
     * Returns the user is admin or mod
     *
-    * 
+    *
     */
-    
+
     public function isAdminOrMod()
     {
         return $this->isAdmin() || $this->isMod();

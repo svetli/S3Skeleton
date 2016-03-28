@@ -4,7 +4,13 @@
 */
 
 $app->get('/recover-password', function($request, $response) {
-    return $this->view->render($response, 'auth/password_recover.twig');
+
+    // Get flash messages from previous request
+    $messages = $this->flash->getMessages();
+
+    return $this->view->render($response, 'auth/password_recover.twig', [
+        'messages' => $messages
+    ]);
 })->setName('password_recover')->add($guest);
 
 $app->post('/recover-password', function($request, $response) {
@@ -35,6 +41,10 @@ $app->post('/recover-password', function($request, $response) {
         {
             //	Since a user wasn't found, redirect the user back to the recovery page.
             //	Might want to flash a message here in the future.
+
+            // Flash Message
+            $this->flash->addMessage('global', 'Sorry but could not find you... :( ');
+
             return $response->withRedirect($this->router->pathFor('password_recover'));
         }
         else
@@ -43,11 +53,11 @@ $app->post('/recover-password', function($request, $response) {
             //	to be used as a recovery attempt validator.
             $identifier = $this->randomlib->generateString(128);
 
-            //	Store the hashed version of the string in the user's password_recover database
+            //	Store the hashed version of the string in the user's recover_hash database
             //	column. We don't want to do anything else here, because all the user has proven
             //	so far is that they know what email address someone used to make an account.
             $user->update([
-                'password_recover' => $this->hash->hash($identifier)
+                'recover_hash' => $this->hash->hash($identifier)
             ]);
 
             //	Send the account owner  an email with a link to the recovery form for their account.
