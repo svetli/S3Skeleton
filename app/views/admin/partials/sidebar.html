@@ -20,9 +20,9 @@
                 </a>
             </li>
             {% endif %}
-            {% if auth.isAdmin or auth.isMod %}
+            {% if auth.isAdminOrMod %}
             <li>
-                <a href="#0">
+                <a href="{{ path_for('new-blog-post') }}">
                     <i class="pe-7s-news-paper"></i>
                     <p>Write New Posts</p>
                 </a>

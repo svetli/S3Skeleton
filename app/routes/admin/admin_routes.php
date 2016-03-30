@@ -94,3 +94,22 @@ $app->get('/dash/users/{number}', function ($request, $response, $args) {
     ]);
 
 })->setName('user-list-page');
+
+$app->get('/dash/new-post', function ($request, $response, $args) {
+
+
+    $cat = $this->category->
+        orderBy('name', 'desc')
+        ->get();
+
+    return $this->view->render($response, 'admin/templates/blog_post.html', [
+        'categories' => $cat
+    ]);
+
+})->setName('new-blog-post')->add($both);
+
+$app->post('/dash/new-post', function ($request, $response, $args) {
+
+
+
+})->setName('add-new-blog-post')->add($both);
