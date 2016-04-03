@@ -110,6 +110,68 @@ $app->get('/dash/new-post', function ($request, $response, $args) {
 
 $app->post('/dash/new-post', function ($request, $response, $args) {
 
+    //	Grab the parameters from the request. This can be done directly from the request,
+    //	but I personally like using the array. Feel free to change it.
+    $posted = $request->getParams();
+
+    //	The blog form only requires the user to enter some values
+    //  so create variables for them.
+    $title      = $posted['title'];
+    $excerpt 	= $posted['excerpt'];
+    $content 	= $posted['content'];
+    $status 	= isset($posted['status']);
+    $categories = $posted['categories'];
+    $user_id 	= $posted['user_id'];
+
+    if (empty($status)) {
+        $status = 0;
+    }
+
+    //	Grab our validation object.
+    $v = $this->validation;
+
+    $v->validate([
+        'title'    => [$title, 'required'],
+        'excerpt'  => [$excerpt, 'required'],
+        'content'  => [$content, 'required'],
+        'status'   => [$status, 'required']
+    ]);
+    //	Now check if our validation passed.
+    if ($v->passes())
+    {
+        $storage = new \Upload\Storage\FileSystem(GLOBAL_ROOT_PATH . '/uploads');
+        $file = new \Upload\File('my_image', $storage);
+        $new_filename = uniqid();
+        $file->setName($new_filename);
+        $file->addValidations(array(
+            new \Upload\Validation\Mimetype(array('image/png', 'image/gif','image/jpeg','image/jpg')),
+            new \Upload\Validation\Size('5M')
+        ));
+        $data = array(
+            'name'       => $file->getNameWithExtension(),
+            'extension'  => $file->getExtension(),
+            'mime'       => $file->getMimetype(),
+            'size'       => $file->getSize(),
+            'md5'        => $file->getMd5(),
+            'dimensions' => $file->getDimensions()
+        );
+        try {
+            $file->upload();
+        } catch (\Exception $e) {
+            $errors = $file->getErrors();
+        }
+        $this->post->create([
+            'title'       => $title,
+            'excerpt'     => $excerpt,
+            'body'        => $content,
+            'user_id'     => $user_id,
+            'status'      => $status,
+            'image'       => $file->getNameWithExtension(),
+            'seo_url'     => FSPATH($title),
+            'category_id' => $categories
+        ]);
+
+    } // End validation passed
 
 
 })->setName('add-new-blog-post')->add($both);

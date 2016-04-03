@@ -97,7 +97,7 @@
                                 Create Post
                             </button>
                             <input type="hidden" name="{{ csrf_key }}" id="{{ csrf_key }}" value="{{ csrf_token }}">
-                            <input type="hidden" name="user_id" id="user_id" value="{{ auth.getUserId }}">
+                            <input type="hidden" name="user_id" id="user_id" value="{{ auth.getId }}">
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -134,7 +134,7 @@
         console.log(selectedValue);
         if (selectedValue === "0") {
             e.preventDefault();
-            swal("Oops...", "Nope", "error");
+            swal("Oops...", "You need select a Category", "error");
         } else {
             this.submit();
         }

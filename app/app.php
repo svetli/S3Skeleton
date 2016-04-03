@@ -68,6 +68,7 @@ $container['notFoundHandler'] = function ($container) {
 
 //	Require Eloquent.
 require(GLOBAL_ROOT_PATH . '/app/database' . PHP_EXT);
+require(GLOBAL_ROOT_PATH . '/app/url_slug' . PHP_EXT);
 
 //	Inject our user model into the container.
 $container['user'] = function ($container) {
