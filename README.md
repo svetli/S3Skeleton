@@ -15,11 +15,11 @@ Most of the work is thanks to [Joey Altman](https://www.codecourse.com/@Hero). :
     "slim/slim": "3.3.0",
     "slim/twig-view": "2.1.1",
     "hassankhan/config": "0.10.0",
-    "illuminate/database": "5.2.21",
+    "illuminate/database": "5.2.28",
     "alexgarrett/violin": "2.2.2",
     "ircmaxell/random-lib": "1.1.0",
     "phpmailer/phpmailer": "5.2.14",
-    "codeguy/upload": "dev-master",
+    "codeguy/upload": "1.3.2",
     "slim/flash": "^0.1.0"
 }
 ```
@@ -34,5 +34,3 @@ Most of the work is thanks to [Joey Altman](https://www.codecourse.com/@Hero). :
 - [ ] Handle redirect to Error 404
 - [ ] Blog post w/ images
 - [ ] Slider Images
-
-
