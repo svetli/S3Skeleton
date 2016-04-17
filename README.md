@@ -31,7 +31,8 @@ Most of the work is thanks to [Joey Altman](https://www.codecourse.com/@Hero). :
 - [x] ~~User list~~
 - [x] ~~Permissions~~
 - [x] ~~Handle redirect to Error 404~~
-- [ ] User Edit (add or remove permissions).
-- [ ] Blog post w/ images
+- [x] ~~Add Blog post w/ images~~
+- [ ] User Edit (add or remove permissions)
+- [ ] Edit Blog post w/ images
 - [ ] Slider Images
 - [ ] Show Category selected from blog post form
