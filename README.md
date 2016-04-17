@@ -29,8 +29,9 @@ Most of the work is thanks to [Joey Altman](https://www.codecourse.com/@Hero). :
 - [x] ~~Flashing messages~~
 - [x] ~~User profiles~~
 - [x] ~~User list~~
-- [ ] User Edit (add or remove permissions).
 - [x] ~~Permissions~~
-- [ ] Handle redirect to Error 404
+- [x] ~~Handle redirect to Error 404~~
+- [ ] User Edit (add or remove permissions).
 - [ ] Blog post w/ images
 - [ ] Slider Images
+- [ ] Show Category selected from blog post form

@@ -32,9 +32,10 @@ $app->get('/dash/u/{username}', function ($request, $response, $args) {
         ->first();
 
     if (!$user) {
-        // TODO
-        // Handle 404 for now, redirect to home
-        return $response->withRedirect($this->router->pathFor('home'));
+
+      // Redirect to 404
+      $errorHandler = $this->notFoundHandler;
+      return $errorHandler($request, $response);
     }
 
     return $this->view->render($response, 'admin/templates/user.html', [
@@ -117,11 +118,11 @@ $app->post('/dash/new-post', function ($request, $response, $args) {
     //	The blog form only requires the user to enter some values
     //  so create variables for them.
     $title      = $posted['title'];
-    $excerpt 	= $posted['excerpt'];
-    $content 	= $posted['content'];
-    $status 	= isset($posted['status']);
+    $excerpt 	  = $posted['excerpt'];
+    $content 	  = $posted['content'];
+    $status 	  = isset($posted['status']);
     $categories = $posted['categories'];
-    $user_id 	= $posted['user_id'];
+    $user_id 	  = $posted['user_id'];
 
     if (empty($status)) {
         $status = 0;
@@ -139,7 +140,7 @@ $app->post('/dash/new-post', function ($request, $response, $args) {
     //	Now check if our validation passed.
     if ($v->passes())
     {
-        $storage = new \Upload\Storage\FileSystem(GLOBAL_ROOT_PATH . '/uploads');
+        $storage = new \Upload\Storage\FileSystem(GLOBAL_ROOT_PATH . '/public/uploads');
         $file = new \Upload\File('my_image', $storage);
         $new_filename = uniqid();
         $file->setName($new_filename);
@@ -167,11 +168,24 @@ $app->post('/dash/new-post', function ($request, $response, $args) {
             'user_id'     => $user_id,
             'status'      => $status,
             'image'       => $file->getNameWithExtension(),
-            'seo_url'     => FSPATH($title),
+            'seo_url'     => post_slug($title),
             'category_id' => $categories
         ]);
 
+        // Flash Message
+        $this->flash->addMessage('global', '¡GREAT!');
+        //	Redirect the user to the admin
+        return $response->withRedirect($this->router->pathFor('admin'));
+
     } // End validation passed
 
+    //	Since our validation didn't pass, we want to reload the page passing
+    //	the errors and posted values. We pass the errors for obvious reasons,
+    //	and we pass the posted data to the view so we can autofill sections of
+    //	the form that the user didn't mess up.
+    return $this->view->render($response, 'admin/templates/blog_post.html', [
+      'errors' 	=> $v->errors(),
+      'posted' 	=> $posted
+    ]);
 
 })->setName('add-new-blog-post')->add($both);

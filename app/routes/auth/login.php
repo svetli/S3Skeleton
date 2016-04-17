@@ -92,13 +92,11 @@ $app->post('/login', function ($request, $response) {
                 //	placeholder until that functionality is released.
                 setcookie($this->config->get('auth.remember'), "{$remember_identifier}___{$remember_token}", Carbon::parse('+1 month')->timestamp);
             }
-
             //	Set the session key via our config with the value being the user's id number.
             $_SESSION[$this->config->get('auth.session')] = $user->id;
 
             // Flash Message
             $this->flash->addMessage('global', 'You are now singned in');
-
             //	Redirect the user to the homepage now that they're logged in.
             return $response->withRedirect($this->router->pathFor('admin'));
         }
@@ -106,7 +104,6 @@ $app->post('/login', function ($request, $response) {
         {
             // Flash Message
             $this->flash->addMessage('global', 'Could not log you in');
-
             //	Redirect the user to the login page now that they're not logged in.
             return $response->withRedirect($this->router->pathFor('login'));
         }
